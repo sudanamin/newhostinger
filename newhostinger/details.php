@@ -2,7 +2,13 @@
 
 require 'data_base_conn.php'; 
 
-
+         if(isset($_GET['id']))
+   {
+      $product_id = $_GET['id'];
+   }
+      else {
+    $product_id = 8;
+       }
 
 ?>
 <!doctype html>
@@ -24,7 +30,7 @@ require 'data_base_conn.php';
 </h3>  -->
 
 
-  <form action="details.php" id = "detialform" method="POST" enctype="multipart/form-data">
+  <form action="details.php?id=<?php echo htmlspecialchars($product_id);?>" id = "detialform" method="POST" enctype="multipart/form-data">
    <input type="submit" name="submit" value="add prouct details!" />
     <p>
 
@@ -75,7 +81,7 @@ require 'data_base_conn.php';
        <br>
 
 
-  <form action="details.php" method="POST" enctype="multipart/form-data">
+  <form action="details.php?id=<?php echo htmlspecialchars($product_id);?>" method="POST" enctype="multipart/form-data">
     <p>
       insert new product detail images <input type="file" name="file" />
 
@@ -87,12 +93,7 @@ require 'data_base_conn.php';
 
 
 
-         if(isset($GET['id']))
-   {
-      $product_id = $GET['id'];
-   }
-      else {
-    $product_id = 8;     }
+
 
    ///////////////////////////   submit_image ///////////////////////////////
 
@@ -123,10 +124,10 @@ require 'data_base_conn.php';
    	mysqli_query($conn,"INSERT INTO `detailimages` VALUE ('','$product_id','$name','$url')");
 
        echo "<br />".$name." has been uploaded";
-        header("Location: details.php");
-       unset($_POST);
+    //    header("Location: details.php");
+     //  unset($_POST);
 
-        require_once('detailimagesjson.php');  // update the json file (detailimagesjson.txt)
+     //   require_once('detailimagesjson.php');  // update the json file (detailimagesjson.txt)
 
 }
 }
